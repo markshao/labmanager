@@ -1,10 +1,14 @@
 __author__ = 'root'
 
+from lmwsproxy import LMService
+
 
 class LabManagerVmProvider(object):
     def __init__(self, provider_info, logger):
         self.provider_info = provider_info
         self.logger = logger
+
+        self.service = LMService(self.provider_info)
 
     def create_machine(self, machine_setting):
         NotImplemented

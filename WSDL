@@ -1,0 +1,470 @@
+Suds ( https://fedorahosted.org/suds/ )  version: 0.4 GA  build: R699-20100913
+
+Service ( LabManager_x0020_SOAP_x0020_interface ) tns="http://vmware.com/labmanager"
+   Prefixes (1)
+      ns0 = "http://vmware.com/labmanager"
+   Ports (2):
+      (LabManager_x0020_SOAP_x0020_interfaceSoap)
+         Methods (166):
+            AddEsxVmsToExternalVc(xs:int configId, xs:string vcServerIp, xs:string vcServerUsername, xs:string vcServerPassword, xs:string vcDatacenter, xs:string vcCluster, )
+            AttachIScsiStorageToEsxVms(xs:int configId, xs:string iScsiServerIp, xs:int iScsiPort, )
+            AttachNfsStorageToEsxVms(xs:int configId, xs:string nfsServerIp, xs:string nfsServerExportedFolder, xs:string datastoreName, )
+            AttachResourcePool(xs:string managedObjectReferenceId, xs:string nameInLabManager, )
+            ConfigurationAddMachine(xs:int id, xs:int template_id, xs:string name, xs:string desc, xs:int boot_seq, xs:int boot_delay, xs:string ip, xs:int ip_assignment_type, )
+            ConfigurationAddMachineEx(xs:int id, xs:int template_id, xs:string name, xs:string desc, xs:int boot_seq, xs:int boot_delay, ArrayOfNetInfo netInfo, )
+            ConfigurationArchive(xs:int configurationID, xs:string archiveName, xs:string archiveDescription, xs:string archiveVMFSStorageServer, xs:long storageLeaseInMilliseconds, )
+            ConfigurationArchiveEx(xs:int configurationID, xs:string archiveName, xs:string archiveDescription, xs:boolean isFullClone, xs:string storageName, xs:long storageLeaseInMilliseconds, )
+            ConfigurationCapture(xs:int configurationId, xs:string newLibraryName, )
+            ConfigurationCaptureEx(xs:int configurationId, xs:string newLibraryName, xs:string libraryDescription, xs:boolean isGoldMaster, xs:string storageName, xs:long storageLeaseInMilliseconds, )
+            ConfigurationChangeOwner(xs:int configurationId, xs:int newOwnerId, )
+            ConfigurationCheckout(xs:int configurationId, xs:string workspaceName, )
+            ConfigurationClone(xs:int configurationId, xs:string newWorkspaceName, )
+            ConfigurationCloneToWorkspace(xs:int configId, xs:int destWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string description, ArrayOfVMCopyData configurationCopyData, xs:int existingConfigId, xs:boolean isFullClone, xs:long storageLeaseInMilliseconds, )
+            ConfigurationCopy(xs:int sg_id, xs:string name, xs:string description, ArrayOfVMCopyData configurationCopyData, )
+            ConfigurationCreate(xs:string name, xs:string desc, NetSettings netInfo, )
+            ConfigurationCreateEx(xs:string name, xs:string desc, )
+            ConfigurationCreateEx2(xs:string name, xs:string desc, SOAPMustBeFenced fencePolicy, xs:long deploymentLeaseInMilliseconds, xs:long storageLeaseInMilliseconds, )
+            ConfigurationDelete(xs:int configurationId, )
+            ConfigurationDeploy(xs:int configurationId, xs:boolean isCached, xs:int fenceMode, )
+            ConfigurationDeployEx(xs:int configurationId, xs:boolean honorBootOrder, xs:boolean startAfterDeploy, ArrayOfFenceNetworkOption fenceNetworkOptions, ArrayOfBridgeNetworkOption bridgeNetworkOptions, )
+            ConfigurationDeployEx2(xs:int configurationId, xs:boolean honorBootOrder, xs:boolean startAfterDeploy, ArrayOfFenceNetworkOption fenceNetworkOptions, ArrayOfBridgeNetworkOption bridgeNetworkOptions, xs:boolean isCrossHost, )
+            ConfigurationExport(xs:int configId, xs:string uncPath, xs:string username, xs:string password, )
+            ConfigurationGetAutoUndeployDateTime(xs:int configId, )
+            ConfigurationGetAutoUndeployInMilliSeconds(xs:int configId, )
+            ConfigurationGetNetworks(xs:int configID, xs:boolean physical, )
+            ConfigurationImport(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:string storageName, )
+            ConfigurationMove(xs:int configIdToMove, xs:int destinationWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string newConfigDescription, xs:long storageLeaseInMilliseconds, xs:int existingConfigId, ArrayOfInt vmIds, xs:boolean deleteOriginalConfig, )
+            ConfigurationPerformAction(xs:int configurationId, xs:int action, )
+            ConfigurationSetLeases(xs:int configId, xs:long deploymentLeaseInMilliseconds, xs:long storageLeaseInMilliseconds, )
+            ConfigurationSetPublicPrivate(xs:int configurationId, xs:boolean isPublic, )
+            ConfigurationUndeploy(xs:int configurationId, )
+            ConfigurationUndeploySaveState(xs:int configurationId, )
+            ConfigureVPod(xs:int configId, )
+            CreateTransportNetwork(xs:int dvsId, xs:int vlanId, xs:boolean isEnabled, xs:string name, )
+            DatastorePerformAction(xs:int datastoreId, xs:int action, )
+            GetAllMedia()
+            GetAllWorkspaces()
+            GetAvailableDVS()
+            GetConfiguration(xs:int id, )
+            GetConfigurationByName(xs:string name, )
+            GetConsoleAccessInfo(xs:int machineId, )
+            GetCurrentOrganization()
+            GetCurrentOrganizationName()
+            GetCurrentRoles()
+            GetCurrentUser()
+            GetCurrentWorkspace()
+            GetCurrentWorkspaceName()
+            GetDatastore(xs:int datastoreId, )
+            GetDatastoreByName(xs:string name, )
+            GetDefaultPhysicalNetwork()
+            GetGroup(xs:string name, )
+            GetHostVSwitches(xs:string hostName, )
+            GetMachine(xs:int machineId, )
+            GetMachineByName(xs:int configurationId, xs:string name, )
+            GetMachineNameInVCenter(xs:int machineId, )
+            GetManagedServerByName(xs:string MSDisplayName, )
+            GetMediaById(xs:int mediaId, )
+            GetMediaByName(xs:string name, )
+            GetMediaStore(xs:int mediaStoreId, )
+            GetMediaStoreByName(xs:string name, )
+            GetNetworkInfo(xs:int vmID, )
+            GetNetworkTemplateByName(xs:string name, )
+            GetNoneNetwork()
+            GetObjectConditions(xs:int objectType, xs:int objectID, )
+            GetOrganization(xs:int organizationId, )
+            GetOrganizationByName(xs:string organizationName, )
+            GetOrganizationWorkspaces(xs:int organizationId, )
+            GetOrganizations()
+            GetResourcePool(xs:int resourcePoolId, )
+            GetResourcePoolByName(xs:string resourcePoolName, )
+            GetRole(xs:int roleId, )
+            GetRoleByName(xs:string roleName, )
+            GetRoleRights(xs:int roleId, )
+            GetRoleRightsByName(xs:string roleName, )
+            GetSingleConfigurationByName(xs:string name, )
+            GetTemplate(xs:int id, )
+            GetTemplateByName(xs:string name, )
+            GetUser(xs:string userName, )
+            GetVCenterServerName()
+            GetWorkspace(xs:int workspaceId, )
+            GetWorkspaceByName(xs:string workspaceName, )
+            LibraryCloneToWorkspace(xs:int libraryId, xs:int destWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string description, ArrayOfVMCopyData copyData, xs:int existingConfigId, xs:boolean isFullClone, xs:long storageLeaseInMilliseconds, )
+            LibrarySetGoldMaster(xs:int libraryId, xs:boolean isGoldMaster, )
+            ListConfigurations(xs:int configurationType, )
+            ListDatastores()
+            ListGroups()
+            ListMachines(xs:int configurationId, )
+            ListManagedServers()
+            ListMediaStores()
+            ListNetworks()
+            ListResourcePools()
+            ListRights()
+            ListRoles()
+            ListTemplates()
+            ListTransportNetworksInCurrentOrg()
+            ListUnmanagedResourcePools()
+            ListUsers()
+            LiveLink(xs:string configName, )
+            LiveLinkDeploy(xs:string liveLinkKey, xs:boolean resetMACAddress, )
+            LiveLinkDeployEx(xs:int destinationWorkspaceId, xs:string liveLinkKey, xs:boolean resetMACAddress, xs:string comments, )
+            LiveLinkEx(xs:string configName, xs:string livelinkComments, )
+            MachineAddToTemplate(xs:int machineId, xs:string name, xs:string description, )
+            MachineConsolidate(xs:int machineId, xs:string storageName, )
+            MachineDelete(xs:int vmId, )
+            MachineInsertCDFromMedia(xs:int machineId, xs:int mediaId, )
+            MachineInsertFloppyFromMedia(xs:int machineId, xs:int mediaId, )
+            MachinePerformAction(xs:int machineId, xs:int action, )
+            MachineResetMacAddress(xs:int machineId, xs:int nicId, )
+            MachineSetPrimaryNIC(xs:int vmId, xs:int nicId, )
+            MachineUpgradeVirtualHardware(xs:int machineId, )
+            ManagedServerPerformAction(xs:string MSDisplayName, xs:int action, )
+            MediaStoreCreate(xs:string mediaStoreName, xs:int datastoreId, xs:string path, )
+            MediaStorePerformAction(xs:int mediaStoreId, xs:int action, )
+            MediaSynchronize()
+            NetworkAddIPRange(xs:int netID, xs:string IPStart, xs:string IPEnd, )
+            NetworkBindToDVS(xs:int networkId, xs:int dvsId, )
+            NetworkCreate(NetworkSpecification netSpec, xs:string IPStart, xs:string IPEnd, )
+            NetworkDelete(xs:int networkId, )
+            NetworkDeleteIPRange(xs:int netID, xs:string IPStart, xs:string IPEnd, )
+            NetworkGetDeployedVSwitch(xs:int netID, xs:string hostName, )
+            NetworkInterfaceCreate(xs:int vmID, xs:int networkID, SOAPIPMode IPAssignmentType, xs:string IPAddress, )
+            NetworkInterfaceDelete(xs:int vmID, xs:int nicID, )
+            NetworkInterfaceModify(xs:int vmId, NetInfo netInfo, )
+            NetworkSetBindings(xs:int netID, xs:string hostName, xs:string vSwitchName, )
+            OrganizationAddGroup(xs:string name, xs:int role, )
+            OrganizationAddMember(xs:int organizationId, xs:string memberName, xs:int memberType, xs:string role, xs:boolean isLdap, )
+            OrganizationAddUser(xs:string name, xs:int role, )
+            OrganizationCreate(xs:string name, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, SOAPFenceMode fenceMode, )
+            OrganizationEdit(xs:int orgId, xs:string name, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, SOAPFenceMode fenceMode, )
+            OrganizationPerformAction(xs:int organizationId, xs:int action, )
+            OrganizationPerformActionOnResource(xs:int organizationId, xs:int resourceId, xs:int resourceType, xs:int action, )
+            OrganizationRemoveMember(xs:int organizationId, xs:string memberName, xs:int memberType, )
+            OrganizationUpdateMemberRole(xs:int organizationId, xs:string memberName, xs:int memberType, xs:string role, )
+            PrepareManagedServer(xs:string MSDisplayName, xs:string username, xs:string password, )
+            ResourcePoolPerformAction(xs:int resourcePoolId, xs:int action, )
+            RoleCopy(xs:int roleId, xs:string newName, xs:string newDescription, )
+            RoleCreate(xs:string name, xs:string description, ArrayOfInt rights, )
+            RoleDelete(xs:int roleId, )
+            RoleEdit(Role role, )
+            RoleEditRights(xs:int roleId, ArrayOfInt rights, )
+            SetCurrentOrganization(xs:int id, )
+            SetCurrentOrganizationByName(xs:string orgName, )
+            SetCurrentWorkspace(xs:int id, )
+            SetCurrentWorkspaceByName(xs:string orgName, xs:string workspaceName, )
+            SetDefaultActiveDirectoryLDAP(xs:string ldapServer, xs:int ldapPort, xs:string connectionString, xs:string user, xs:string password, )
+            SetTemplate(Template template, )
+            SetTransportNetworkIsEnabled(xs:int transportNetworkId, xs:boolean isEnabled, )
+            StorageServerVMFSEdit(xs:string name, VMFSStorageServer server, )
+            StorageServerVMFSFindByName(xs:string name, )
+            TemplateChangeOwner(xs:int templateId, xs:int newOwnerId, )
+            TemplateClone(xs:int template_id, xs:string name, xs:string description, )
+            TemplateCopy(xs:int vs_id, xs:string name, xs:string description, xs:string storageName, )
+            TemplateCreate(xs:string name, xs:string description, xs:string storage_name, xs:int VSType_id, xs:int diskType, xs:int diskSize, xs:int memorySize, ArrayOfVMParameter parameterList, )
+            TemplateExport(xs:int template_id, xs:string UNCPath, xs:string username, xs:string password, )
+            TemplateImport(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:int VSTypeID, xs:string storageServerName, ArrayOfVMParameter parameterList, )
+            TemplateImportFromSMB(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:string storageServerName, ArrayOfVMParameter parameterList, xs:boolean performGuestCustomization, )
+            TemplatePerformAction(xs:int template_id, xs:int action, )
+            UserCreate(User user, )
+            UserDelete(xs:string userName, )
+            UserPerformAction(xs:string userName, xs:int action, )
+            WorkspaceAddMember(xs:int id, xs:string memberName, xs:int memberType, xs:string roleName, xs:boolean isLdap, )
+            WorkspaceCreate(xs:string name, xs:boolean isMain, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, )
+            WorkspacePerformAction(xs:int workspaceId, xs:int action, )
+            WorkspacePerformActionOnResourcePool(xs:int workspaceId, xs:int resourceId, xs:int action, )
+            WorkspaceUpdateMemberRole(xs:int workspaceId, xs:string memberName, xs:int memberType, xs:string roleName, )
+         Types (63):
+            ArrayOfBridgeNetworkOption
+            ArrayOfConfiguration
+            ArrayOfFenceNetworkOption
+            ArrayOfGroup
+            ArrayOfInt
+            ArrayOfMachine
+            ArrayOfManagedServer
+            ArrayOfMedia
+            ArrayOfMediaStore
+            ArrayOfNetInfo
+            ArrayOfNetwork
+            ArrayOfObjectCondition
+            ArrayOfOrganization
+            ArrayOfResourcePool
+            ArrayOfRight
+            ArrayOfRole
+            ArrayOfString
+            ArrayOfTemplate
+            ArrayOfTransportNetwork
+            ArrayOfUser
+            ArrayOfVIMHost
+            ArrayOfVIMResourcePoolInfo
+            ArrayOfVMCopyData
+            ArrayOfVMFSStorageServer
+            ArrayOfVMParameter
+            ArrayOfVNetworkDistributedSwitch
+            ArrayOfWorkspace
+            AuthenticationHeader
+            BridgeNetworkOption
+            Bucket
+            Configuration
+            FenceNetworkOption
+            Group
+            MKSConsoleInfo
+            Machine
+            ManagedServer
+            Media
+            MediaStore
+            NetInfo
+            NetSettings
+            Network
+            NetworkSpecification
+            ObjectCondition
+            Organization
+            ResourcePool
+            Right
+            Role
+            SOAPFenceMode
+            SOAPIPMode
+            SOAPMustBeFenced
+            SOAPNetworkType
+            StorageServer
+            Template
+            TransportNetwork
+            User
+            VIMHost
+            VIMResourcePoolInfo
+            VMCopyData
+            VMFSStorageServer
+            VMParameter
+            VMParameterType
+            VNetworkDistributedSwitch
+            Workspace
+      (LabManager_x0020_SOAP_x0020_interfaceSoap12)
+         Methods (166):
+            AddEsxVmsToExternalVc(xs:int configId, xs:string vcServerIp, xs:string vcServerUsername, xs:string vcServerPassword, xs:string vcDatacenter, xs:string vcCluster, )
+            AttachIScsiStorageToEsxVms(xs:int configId, xs:string iScsiServerIp, xs:int iScsiPort, )
+            AttachNfsStorageToEsxVms(xs:int configId, xs:string nfsServerIp, xs:string nfsServerExportedFolder, xs:string datastoreName, )
+            AttachResourcePool(xs:string managedObjectReferenceId, xs:string nameInLabManager, )
+            ConfigurationAddMachine(xs:int id, xs:int template_id, xs:string name, xs:string desc, xs:int boot_seq, xs:int boot_delay, xs:string ip, xs:int ip_assignment_type, )
+            ConfigurationAddMachineEx(xs:int id, xs:int template_id, xs:string name, xs:string desc, xs:int boot_seq, xs:int boot_delay, ArrayOfNetInfo netInfo, )
+            ConfigurationArchive(xs:int configurationID, xs:string archiveName, xs:string archiveDescription, xs:string archiveVMFSStorageServer, xs:long storageLeaseInMilliseconds, )
+            ConfigurationArchiveEx(xs:int configurationID, xs:string archiveName, xs:string archiveDescription, xs:boolean isFullClone, xs:string storageName, xs:long storageLeaseInMilliseconds, )
+            ConfigurationCapture(xs:int configurationId, xs:string newLibraryName, )
+            ConfigurationCaptureEx(xs:int configurationId, xs:string newLibraryName, xs:string libraryDescription, xs:boolean isGoldMaster, xs:string storageName, xs:long storageLeaseInMilliseconds, )
+            ConfigurationChangeOwner(xs:int configurationId, xs:int newOwnerId, )
+            ConfigurationCheckout(xs:int configurationId, xs:string workspaceName, )
+            ConfigurationClone(xs:int configurationId, xs:string newWorkspaceName, )
+            ConfigurationCloneToWorkspace(xs:int configId, xs:int destWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string description, ArrayOfVMCopyData configurationCopyData, xs:int existingConfigId, xs:boolean isFullClone, xs:long storageLeaseInMilliseconds, )
+            ConfigurationCopy(xs:int sg_id, xs:string name, xs:string description, ArrayOfVMCopyData configurationCopyData, )
+            ConfigurationCreate(xs:string name, xs:string desc, NetSettings netInfo, )
+            ConfigurationCreateEx(xs:string name, xs:string desc, )
+            ConfigurationCreateEx2(xs:string name, xs:string desc, SOAPMustBeFenced fencePolicy, xs:long deploymentLeaseInMilliseconds, xs:long storageLeaseInMilliseconds, )
+            ConfigurationDelete(xs:int configurationId, )
+            ConfigurationDeploy(xs:int configurationId, xs:boolean isCached, xs:int fenceMode, )
+            ConfigurationDeployEx(xs:int configurationId, xs:boolean honorBootOrder, xs:boolean startAfterDeploy, ArrayOfFenceNetworkOption fenceNetworkOptions, ArrayOfBridgeNetworkOption bridgeNetworkOptions, )
+            ConfigurationDeployEx2(xs:int configurationId, xs:boolean honorBootOrder, xs:boolean startAfterDeploy, ArrayOfFenceNetworkOption fenceNetworkOptions, ArrayOfBridgeNetworkOption bridgeNetworkOptions, xs:boolean isCrossHost, )
+            ConfigurationExport(xs:int configId, xs:string uncPath, xs:string username, xs:string password, )
+            ConfigurationGetAutoUndeployDateTime(xs:int configId, )
+            ConfigurationGetAutoUndeployInMilliSeconds(xs:int configId, )
+            ConfigurationGetNetworks(xs:int configID, xs:boolean physical, )
+            ConfigurationImport(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:string storageName, )
+            ConfigurationMove(xs:int configIdToMove, xs:int destinationWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string newConfigDescription, xs:long storageLeaseInMilliseconds, xs:int existingConfigId, ArrayOfInt vmIds, xs:boolean deleteOriginalConfig, )
+            ConfigurationPerformAction(xs:int configurationId, xs:int action, )
+            ConfigurationSetLeases(xs:int configId, xs:long deploymentLeaseInMilliseconds, xs:long storageLeaseInMilliseconds, )
+            ConfigurationSetPublicPrivate(xs:int configurationId, xs:boolean isPublic, )
+            ConfigurationUndeploy(xs:int configurationId, )
+            ConfigurationUndeploySaveState(xs:int configurationId, )
+            ConfigureVPod(xs:int configId, )
+            CreateTransportNetwork(xs:int dvsId, xs:int vlanId, xs:boolean isEnabled, xs:string name, )
+            DatastorePerformAction(xs:int datastoreId, xs:int action, )
+            GetAllMedia()
+            GetAllWorkspaces()
+            GetAvailableDVS()
+            GetConfiguration(xs:int id, )
+            GetConfigurationByName(xs:string name, )
+            GetConsoleAccessInfo(xs:int machineId, )
+            GetCurrentOrganization()
+            GetCurrentOrganizationName()
+            GetCurrentRoles()
+            GetCurrentUser()
+            GetCurrentWorkspace()
+            GetCurrentWorkspaceName()
+            GetDatastore(xs:int datastoreId, )
+            GetDatastoreByName(xs:string name, )
+            GetDefaultPhysicalNetwork()
+            GetGroup(xs:string name, )
+            GetHostVSwitches(xs:string hostName, )
+            GetMachine(xs:int machineId, )
+            GetMachineByName(xs:int configurationId, xs:string name, )
+            GetMachineNameInVCenter(xs:int machineId, )
+            GetManagedServerByName(xs:string MSDisplayName, )
+            GetMediaById(xs:int mediaId, )
+            GetMediaByName(xs:string name, )
+            GetMediaStore(xs:int mediaStoreId, )
+            GetMediaStoreByName(xs:string name, )
+            GetNetworkInfo(xs:int vmID, )
+            GetNetworkTemplateByName(xs:string name, )
+            GetNoneNetwork()
+            GetObjectConditions(xs:int objectType, xs:int objectID, )
+            GetOrganization(xs:int organizationId, )
+            GetOrganizationByName(xs:string organizationName, )
+            GetOrganizationWorkspaces(xs:int organizationId, )
+            GetOrganizations()
+            GetResourcePool(xs:int resourcePoolId, )
+            GetResourcePoolByName(xs:string resourcePoolName, )
+            GetRole(xs:int roleId, )
+            GetRoleByName(xs:string roleName, )
+            GetRoleRights(xs:int roleId, )
+            GetRoleRightsByName(xs:string roleName, )
+            GetSingleConfigurationByName(xs:string name, )
+            GetTemplate(xs:int id, )
+            GetTemplateByName(xs:string name, )
+            GetUser(xs:string userName, )
+            GetVCenterServerName()
+            GetWorkspace(xs:int workspaceId, )
+            GetWorkspaceByName(xs:string workspaceName, )
+            LibraryCloneToWorkspace(xs:int libraryId, xs:int destWorkspaceId, xs:boolean isNewConfiguration, xs:string newConfigName, xs:string description, ArrayOfVMCopyData copyData, xs:int existingConfigId, xs:boolean isFullClone, xs:long storageLeaseInMilliseconds, )
+            LibrarySetGoldMaster(xs:int libraryId, xs:boolean isGoldMaster, )
+            ListConfigurations(xs:int configurationType, )
+            ListDatastores()
+            ListGroups()
+            ListMachines(xs:int configurationId, )
+            ListManagedServers()
+            ListMediaStores()
+            ListNetworks()
+            ListResourcePools()
+            ListRights()
+            ListRoles()
+            ListTemplates()
+            ListTransportNetworksInCurrentOrg()
+            ListUnmanagedResourcePools()
+            ListUsers()
+            LiveLink(xs:string configName, )
+            LiveLinkDeploy(xs:string liveLinkKey, xs:boolean resetMACAddress, )
+            LiveLinkDeployEx(xs:int destinationWorkspaceId, xs:string liveLinkKey, xs:boolean resetMACAddress, xs:string comments, )
+            LiveLinkEx(xs:string configName, xs:string livelinkComments, )
+            MachineAddToTemplate(xs:int machineId, xs:string name, xs:string description, )
+            MachineConsolidate(xs:int machineId, xs:string storageName, )
+            MachineDelete(xs:int vmId, )
+            MachineInsertCDFromMedia(xs:int machineId, xs:int mediaId, )
+            MachineInsertFloppyFromMedia(xs:int machineId, xs:int mediaId, )
+            MachinePerformAction(xs:int machineId, xs:int action, )
+            MachineResetMacAddress(xs:int machineId, xs:int nicId, )
+            MachineSetPrimaryNIC(xs:int vmId, xs:int nicId, )
+            MachineUpgradeVirtualHardware(xs:int machineId, )
+            ManagedServerPerformAction(xs:string MSDisplayName, xs:int action, )
+            MediaStoreCreate(xs:string mediaStoreName, xs:int datastoreId, xs:string path, )
+            MediaStorePerformAction(xs:int mediaStoreId, xs:int action, )
+            MediaSynchronize()
+            NetworkAddIPRange(xs:int netID, xs:string IPStart, xs:string IPEnd, )
+            NetworkBindToDVS(xs:int networkId, xs:int dvsId, )
+            NetworkCreate(NetworkSpecification netSpec, xs:string IPStart, xs:string IPEnd, )
+            NetworkDelete(xs:int networkId, )
+            NetworkDeleteIPRange(xs:int netID, xs:string IPStart, xs:string IPEnd, )
+            NetworkGetDeployedVSwitch(xs:int netID, xs:string hostName, )
+            NetworkInterfaceCreate(xs:int vmID, xs:int networkID, SOAPIPMode IPAssignmentType, xs:string IPAddress, )
+            NetworkInterfaceDelete(xs:int vmID, xs:int nicID, )
+            NetworkInterfaceModify(xs:int vmId, NetInfo netInfo, )
+            NetworkSetBindings(xs:int netID, xs:string hostName, xs:string vSwitchName, )
+            OrganizationAddGroup(xs:string name, xs:int role, )
+            OrganizationAddMember(xs:int organizationId, xs:string memberName, xs:int memberType, xs:string role, xs:boolean isLdap, )
+            OrganizationAddUser(xs:string name, xs:int role, )
+            OrganizationCreate(xs:string name, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, SOAPFenceMode fenceMode, )
+            OrganizationEdit(xs:int orgId, xs:string name, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, SOAPFenceMode fenceMode, )
+            OrganizationPerformAction(xs:int organizationId, xs:int action, )
+            OrganizationPerformActionOnResource(xs:int organizationId, xs:int resourceId, xs:int resourceType, xs:int action, )
+            OrganizationRemoveMember(xs:int organizationId, xs:string memberName, xs:int memberType, )
+            OrganizationUpdateMemberRole(xs:int organizationId, xs:string memberName, xs:int memberType, xs:string role, )
+            PrepareManagedServer(xs:string MSDisplayName, xs:string username, xs:string password, )
+            ResourcePoolPerformAction(xs:int resourcePoolId, xs:int action, )
+            RoleCopy(xs:int roleId, xs:string newName, xs:string newDescription, )
+            RoleCreate(xs:string name, xs:string description, ArrayOfInt rights, )
+            RoleDelete(xs:int roleId, )
+            RoleEdit(Role role, )
+            RoleEditRights(xs:int roleId, ArrayOfInt rights, )
+            SetCurrentOrganization(xs:int id, )
+            SetCurrentOrganizationByName(xs:string orgName, )
+            SetCurrentWorkspace(xs:int id, )
+            SetCurrentWorkspaceByName(xs:string orgName, xs:string workspaceName, )
+            SetDefaultActiveDirectoryLDAP(xs:string ldapServer, xs:int ldapPort, xs:string connectionString, xs:string user, xs:string password, )
+            SetTemplate(Template template, )
+            SetTransportNetworkIsEnabled(xs:int transportNetworkId, xs:boolean isEnabled, )
+            StorageServerVMFSEdit(xs:string name, VMFSStorageServer server, )
+            StorageServerVMFSFindByName(xs:string name, )
+            TemplateChangeOwner(xs:int templateId, xs:int newOwnerId, )
+            TemplateClone(xs:int template_id, xs:string name, xs:string description, )
+            TemplateCopy(xs:int vs_id, xs:string name, xs:string description, xs:string storageName, )
+            TemplateCreate(xs:string name, xs:string description, xs:string storage_name, xs:int VSType_id, xs:int diskType, xs:int diskSize, xs:int memorySize, ArrayOfVMParameter parameterList, )
+            TemplateExport(xs:int template_id, xs:string UNCPath, xs:string username, xs:string password, )
+            TemplateImport(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:int VSTypeID, xs:string storageServerName, ArrayOfVMParameter parameterList, )
+            TemplateImportFromSMB(xs:string UNCPath, xs:string dirUsername, xs:string dirPassword, xs:string name, xs:string description, xs:string storageServerName, ArrayOfVMParameter parameterList, xs:boolean performGuestCustomization, )
+            TemplatePerformAction(xs:int template_id, xs:int action, )
+            UserCreate(User user, )
+            UserDelete(xs:string userName, )
+            UserPerformAction(xs:string userName, xs:int action, )
+            WorkspaceAddMember(xs:int id, xs:string memberName, xs:int memberType, xs:string roleName, xs:boolean isLdap, )
+            WorkspaceCreate(xs:string name, xs:boolean isMain, xs:string description, xs:int storedVMQuota, xs:int deployedVMQuota, )
+            WorkspacePerformAction(xs:int workspaceId, xs:int action, )
+            WorkspacePerformActionOnResourcePool(xs:int workspaceId, xs:int resourceId, xs:int action, )
+            WorkspaceUpdateMemberRole(xs:int workspaceId, xs:string memberName, xs:int memberType, xs:string roleName, )
+         Types (63):
+            ArrayOfBridgeNetworkOption
+            ArrayOfConfiguration
+            ArrayOfFenceNetworkOption
+            ArrayOfGroup
+            ArrayOfInt
+            ArrayOfMachine
+            ArrayOfManagedServer
+            ArrayOfMedia
+            ArrayOfMediaStore
+            ArrayOfNetInfo
+            ArrayOfNetwork
+            ArrayOfObjectCondition
+            ArrayOfOrganization
+            ArrayOfResourcePool
+            ArrayOfRight
+            ArrayOfRole
+            ArrayOfString
+            ArrayOfTemplate
+            ArrayOfTransportNetwork
+            ArrayOfUser
+            ArrayOfVIMHost
+            ArrayOfVIMResourcePoolInfo
+            ArrayOfVMCopyData
+            ArrayOfVMFSStorageServer
+            ArrayOfVMParameter
+            ArrayOfVNetworkDistributedSwitch
+            ArrayOfWorkspace
+            AuthenticationHeader
+            BridgeNetworkOption
+            Bucket
+            Configuration
+            FenceNetworkOption
+            Group
+            MKSConsoleInfo
+            Machine
+            ManagedServer
+            Media
+            MediaStore
+            NetInfo
+            NetSettings
+            Network
+            NetworkSpecification
+            ObjectCondition
+            Organization
+            ResourcePool
+            Right
+            Role
+            SOAPFenceMode
+            SOAPIPMode
+            SOAPMustBeFenced
+            SOAPNetworkType
+            StorageServer
+            Template
+            TransportNetwork
+            User
+            VIMHost
+            VIMResourcePoolInfo
+            VMCopyData
+            VMFSStorageServer
+            VMParameter
+            VMParameterType
+            VNetworkDistributedSwitch
+            Workspace
