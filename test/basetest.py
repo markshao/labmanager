@@ -18,21 +18,27 @@ template_ID = 12643
 network_ID = 71
 
 soapIP_mode = client.factory.create("SOAPIPMode")
-print soapIP_mode
 
 netinfo = client.factory.create("NetInfo")
-netinfo.networkId = network_ID
-netinfo.resetMac = True
-netinfo.vmxSlot = 0
-netinfo.nicId = 0
-netinfo.isConnected = True
-netinfo.ipAddressingMode = soapIP_mode.STATIC_AUTOMATIC
+# netinfo.networkId = network_ID
+# netinfo.resetMac = True
+# netinfo.vmxSlot = 1
+# netinfo.nicId = 1
+# netinfo.isConnected = True
+# netinfo.ipAddressingMode = soapIP_mode.STATIC_AUTOMATIC
 
 newArrayofNetInfo = client.factory.create("ArrayOfNetInfo")
 newArrayofNetInfo.NetInfo.append(netinfo)
 
-print newArrayofNetInfo
+tangram_id = 8441
+lxc_id = 22395
+git_lab_ci_ruunner = 22005
 
-print client.service.ConfigurationAddMachineEx(configuration_ID, template_ID, "test_aaa", "test_aaa", 0, 0,
-                                               newArrayofNetInfo)
 
+print client.service.GetNetworkInfo(23267)
+
+#
+# print client.service.ConfigurationAddMachineEx(configuration_ID, template_ID, "test_aaa", "test_aaa", 0, 0,
+#                                                newArrayofNetInfo)
+#
+# print client.service.NetworkInterfaceCreate(23267,network_ID,soapIP_mode.STATIC_AUTOMATIC)
