@@ -18,6 +18,7 @@ template_ID = 12643
 network_ID = 71
 
 soapIP_mode = client.factory.create("SOAPIPMode")
+# print soapIP_mode
 
 netinfo = client.factory.create("NetInfo")
 # netinfo.networkId = network_ID
@@ -33,12 +34,21 @@ newArrayofNetInfo.NetInfo.append(netinfo)
 tangram_id = 8441
 lxc_id = 22395
 git_lab_ci_ruunner = 22005
-
-
-print client.service.GetNetworkInfo(23267)
-
 #
-# print client.service.ConfigurationAddMachineEx(configuration_ID, template_ID, "test_aaa", "test_aaa", 0, 0,
-#                                                newArrayofNetInfo)
+import suds
 #
-# print client.service.NetworkInterfaceCreate(23267,network_ID,soapIP_mode.STATIC_AUTOMATIC)
+try:
+    # print client.service.GetSingleConfigurationByName("pagrant").id
+    result = client.service.ListNetworks()
+    print result.Network
+except suds.WebFault,e:
+    print e
+# print client.service.GetNetworkInfo(23275)
+# print client.service.GetMachine(23275)
+# #
+# machine_id = client.service.ConfigurationAddMachineEx(configuration_ID, template_ID, "testaaa", "testaaa", 0, 0,
+#                                                       newArrayofNetInfo)
+#
+# print machine_id
+#
+# print client.service.NetworkInterfaceCreate(machine_id, network_ID, soapIP_mode.STATIC_AUTOMATIC)
