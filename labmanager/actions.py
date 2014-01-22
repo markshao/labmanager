@@ -11,7 +11,9 @@ class LabManagerVmProvider(object):
         self.service = LMService(self.provider_info)
 
     def create_machine(self, machine_setting):
-        NotImplemented
+        # we currently just support create the machines under an absolutely configuration
+        configuration_name = self.provider_info['configuration']
+        self.configuration_id = self.service.get_configuration_id_by_name(configuration_name)
 
     def start_machine(self, machine_setting):
         NotImplemented

@@ -39,8 +39,8 @@ import suds
 #
 try:
     # print client.service.GetSingleConfigurationByName("pagrant").id
-    result = client.service.ListNetworks()
-    print result.Network
+    result = client.service.ListTemplates()
+    print result.Template
 except suds.WebFault,e:
     print e
 # print client.service.GetNetworkInfo(23275)
