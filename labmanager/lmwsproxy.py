@@ -112,3 +112,8 @@ class LMService(object):
     def machine_delete(self, machine_id):
         self.proxy.service.MachineDelete(machine_id)
 
+    def get_machine_ip(self,machine_id):
+        result = self.proxy.service.GetNetworkInfo(machine_id)
+        network_infos = result.NetInfo
+        return network_infos[0].ipAddress
+
