@@ -7,7 +7,8 @@ Pagrantfile to use it
 
 Install
 -------------------------
-.. code::
+
+.. code-block:: python
 
     pagrant vmprovider install labmanager [--index-url http://pypi.douban.com/simple]
 
@@ -18,7 +19,7 @@ Pagrantfile configuration
 
 define the vmprovider
 `````````````````````
-.. code:: python
+.. code-block:: python
 
     def vmprovider():
         return {
@@ -29,7 +30,7 @@ define the vmprovider
 
 define the vmprovider config
 ````````````````````````````
-.. code:: python
+.. code-block:: python
 
     def vmprovider_config():
         return {
