@@ -1,7 +1,7 @@
 LabManager
 ==========
 
-This is the labmanger vmprovider plugin for the `Pagrant <https://github.com/markshao/pagrant>`, it can
+This is the labmanger vmprovider plugin for the `Pagrant <https://github.com/markshao/pagrant>`_, it can
 help you distribute your test cases to the labmanager support cloud platform. You just need to config the
 Pagrantfile to use it
 
@@ -15,7 +15,7 @@ Pagrantfile configuration
 
 define the vmprovider
 `````````````````````
-code:: python
+.. code-block:: python
     def vmprovider():
         return {
             "type": "labmanager"  # this is required to make pagrant detect that you are using the labmanger plguin
@@ -23,7 +23,7 @@ code:: python
 
 define the vmprovider config
 ````````````````````````````
-code:: python
+.. code-block:: python
     def vmprovider_config():
         return {
             'wsdl_url': 'https://chnservices-lm.dctmlabs.com/LabManager/SOAP/LabManagerinternal.asmx?WSDL',
