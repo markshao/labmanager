@@ -7,7 +7,7 @@ Pagrantfile to use it
 
 Install
 -------------------------
-code:: bash
+.. code::
     pagrant vmprovider install labmanager [--index-url http://pypi.douban.com/simple]
 
 Pagrantfile configuration
@@ -15,7 +15,7 @@ Pagrantfile configuration
 
 define the vmprovider
 `````````````````````
-.. code-block:: python
+.. code:: python
     def vmprovider():
         return {
             "type": "labmanager"  # this is required to make pagrant detect that you are using the labmanger plguin
@@ -23,7 +23,7 @@ define the vmprovider
 
 define the vmprovider config
 ````````````````````````````
-.. code-block:: python
+.. code::: python
     def vmprovider_config():
         return {
             'wsdl_url': 'https://chnservices-lm.dctmlabs.com/LabManager/SOAP/LabManagerinternal.asmx?WSDL',
