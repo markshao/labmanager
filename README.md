@@ -1,4 +1,0 @@
-labmanager
-==========
-
-labmanager for pagrant
