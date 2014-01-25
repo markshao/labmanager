@@ -17,18 +17,20 @@ Pagrantfile configuration
 -------------------------
 
 
-define the vmprovider
+vmprovider
 `````````````````````
 .. code-block:: python
 
     def vmprovider():
         return {
-            "type": "labmanager"  # this is required to make pagrant detect that you are using the labmanger plguin
+            "type": "labmanager"
+            # this is required to make pagrant detect that
+            # you are using the labmanger plguin
         }
 
 
 
-define the vmprovider config
+vmprovider config
 ````````````````````````````
 .. code-block:: python
 
@@ -41,7 +43,8 @@ define the vmprovider config
             'workspacename': 'Main', # workspace name
             'default_template_name': 'xmnTemplate', # the template name displayed on the web portal
             'default_network_name': 'PF-10.32.122.133-254:network', # the network name displayed on the web portal
-            'configuration': 'pagrant1', # all the machines will been created under it , please create the new configuraion for the test
+            'configuration': 'pagrant1', # all the machines will been created under it ,
+                                         #  please create the new configuraion for the test
 
             'ssh_username': 'root', # default user for ssh
             'ssh_password': 'password', # default password for ssh
