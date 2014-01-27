@@ -8,7 +8,6 @@ WORKSPACE = 'workspacename'
 
 AUTHENTICATION_HEADER = 'AuthenticationHeader'
 
-import logging
 from suds.client import Client
 from suds import WebFault
 
@@ -21,12 +20,11 @@ class LMService(object):
     template_cache = {}
 
     def __init__(self, provider_info, logger):
-        logging.getLogger('suds.client').setLevel(logging.CRITICAL)  # close the logger for suds
 
         self.provider_info = provider_info
 
         self.proxy = Client(provider_info[WSDL])
-        self.options.transport.options.timeout = TIMEOUT
+        self.proxy.set_options(timeout=TIMEOUT)
 
         authenticationHeader = self.proxy.factory.create(AUTHENTICATION_HEADER)
         authenticationHeader[USERNAME] = self.provider_info[USERNAME]

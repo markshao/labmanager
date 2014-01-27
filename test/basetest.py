@@ -38,7 +38,7 @@ git_lab_ci_ruunner = 22005
 import suds
 #
 try:
-    print client.service.ConfigurationUndeploy(10221)
+    print client.service.GetConfigurationByName("pagrant1")
     # result = client.service.GetNetworkInfo(22395)
     # print (result.NetInfo)[0].ipAddress
 except suds.WebFault,e:
