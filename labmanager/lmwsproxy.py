@@ -8,18 +8,25 @@ WORKSPACE = 'workspacename'
 
 AUTHENTICATION_HEADER = 'AuthenticationHeader'
 
+import logging
 from suds.client import Client
 from suds import WebFault
+
+
+TIMEOUT = 60 * 60 * 5
 
 
 class LMService(object):
     network_cache = {}
     template_cache = {}
 
-    def __init__(self, provider_info):
+    def __init__(self, provider_info, logger):
+        logging.getLogger('suds.client').setLevel(logging.CRITICAL)  # close the logger for suds
+
         self.provider_info = provider_info
 
         self.proxy = Client(provider_info[WSDL])
+        self.options.transport.options.timeout = TIMEOUT
 
         authenticationHeader = self.proxy.factory.create(AUTHENTICATION_HEADER)
         authenticationHeader[USERNAME] = self.provider_info[USERNAME]
@@ -31,6 +38,8 @@ class LMService(object):
 
         self.soapIP_mode = self.proxy.factory.create("SOAPIPMode")
 
+        self.logger = logger
+
     def get_configuration_id_by_name(self, configuration_name):
         try:
             configuration = self.proxy.service.GetSingleConfigurationByName(configuration_name)
@@ -38,6 +47,7 @@ class LMService(object):
         except WebFault:
             # if the configuratoin not found , create the new one
             configuration_id = self.proxy.service.ConfigurationCreateEx(configuration_name, configuration_name)
+            self.logger.info("create the configuration **%s**" % configuration_name)
             return configuration_id
 
     def get_network_id_by_name(self, network_name):
@@ -112,7 +122,7 @@ class LMService(object):
     def machine_delete(self, machine_id):
         self.proxy.service.MachineDelete(machine_id)
 
-    def get_machine_ip(self,machine_id):
+    def get_machine_ip(self, machine_id):
         result = self.proxy.service.GetNetworkInfo(machine_id)
         network_infos = result.NetInfo
         return network_infos[0].ipAddress

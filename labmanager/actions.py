@@ -15,9 +15,9 @@ class LabManagerVmProvider(object):
 
     def create_machines(self, machine_settings):
         # we currently just support create the machines under an absolutely configuration
-        configuration_name = self.provider_info['configuration']
+        self.configuration_name = self.provider_info['configuration']
 
-        self.configuration_id = self.service.get_configuration_id_by_name(configuration_name)
+        self.configuration_id = self.service.get_configuration_id_by_name(self.configuration_name)
 
         for machine_name, machine_setting in machine_settings.items():
             template_name = machine_setting.get("template_name", None)
@@ -30,17 +30,20 @@ class LabManagerVmProvider(object):
             machine_desc = machine_desc if machine_desc else machine_name
             machine_id = self.service.machine_create_under_configuration(self.configuration_id, template_name,
                                                                          network_name, machine_name, machine_desc)
-
+            self.logger.info("create the vm <%s> successfully" % machine_name)
             self.machine_map[machine_name] = machine_id
 
     def start_machines(self, machine_settings):
         self.service.configuration_deploy_by_id(self.configuration_id)
+        self.logger.info("deploy the configuration **%s** successfully" % self.configuration_name)
 
     def stop_machines(self, machine_settings):
         self.service.configuration_undeploy_by_id(self.configuration_id)
+        self.logger.info("undeploy the configuration **%s** successfully" % self.configuration_name)
 
     def destroy_machines(self, machine_settings):
         self.service.configuration_delete_by_id(self.configuration_id)
+        self.logger.info("delete the configuration **%s** successfully" % self.configuration_name)
 
     def get_machine_ip(self, machine_setting):
         machine_id = self.machine_map[machine_setting['name']]
