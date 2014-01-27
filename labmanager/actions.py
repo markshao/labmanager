@@ -8,7 +8,7 @@ class LabManagerVmProvider(object):
         self.provider_info = provider_info
         self.logger = logger
 
-        self.service = LMService(self.provider_info)
+        self.service = LMService(self.provider_info, self.logger)
         self.default_template_name = self.provider_info['default_template_name']
         self.default_network_name = self.provider_info['default_network_name']
         self.machine_map = {}
