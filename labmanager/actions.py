@@ -1,6 +1,7 @@
 __author__ = 'root'
 
 from lmwsproxy import LMService
+from util import read_dict_fd, write_json_fd
 
 
 class LabManagerVmProvider(object):
@@ -48,3 +49,17 @@ class LabManagerVmProvider(object):
     def get_machine_ip(self, machine_setting):
         machine_id = self.machine_map[machine_setting['name']]
         return self.service.get_machine_ip(machine_id)
+
+    def persistent_to_local(self, machine_settings, path):
+        data = {"configuration_id": self.configuration_id}  # just write down the configuration id
+        write_json_fd(data, path)
+
+
+    def clean_from_persistent(self, path):
+        res = read_dict_fd(path)
+        self.configuration_id = res["configuration_id"]
+        self.service.configuration_undeploy_by_id(self.configuration_id)
+        self.service.configuration_delete_by_id(self.configuration_id)
+
+        self.logger.info("clean the entire configuration@labmanager successfully")
+
