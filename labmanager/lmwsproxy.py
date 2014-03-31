@@ -8,8 +8,8 @@ WORKSPACE = 'workspacename'
 
 AUTHENTICATION_HEADER = 'AuthenticationHeader'
 
-from suds.client import Client
-from suds import WebFault
+from ..suds.client import Client
+from ..suds import WebFault
 
 
 TIMEOUT = 60 * 60 * 5
@@ -105,13 +105,13 @@ class LMService(object):
         newArrayofNetInfo = self.proxy.factory.create("ArrayOfNetInfo")
         newArrayofNetInfo.NetInfo.append(netinfo)
 
-        template_id = self.get_template_id_by_name(template_name) # get the template id
+        template_id = self.get_template_id_by_name(template_name)  # get the template id
 
         new_machine_id = self.proxy.service.ConfigurationAddMachineEx(configuration_id, template_id, machine_name,
                                                                       machine_description,
                                                                       0, 0,
                                                                       newArrayofNetInfo)
-        network_id = self.get_network_id_by_name(network_name) # get the network id
+        network_id = self.get_network_id_by_name(network_name)  # get the network id
 
         self.proxy.service.NetworkInterfaceCreate(new_machine_id, network_id, self.soapIP_mode.STATIC_AUTOMATIC)
 
