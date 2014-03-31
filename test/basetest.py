@@ -1,5 +1,12 @@
 __author__ = 'root'
 
+import sys, os
+
+# some hack
+sys_path = os.path.abspath(os.path.relpath(os.path.pardir, os.path.dirname(__file__)))
+sys.path.insert(0, sys_path)
+
+
 from suds.client import Client
 
 client = Client("https://chnservices-lm.dctmlabs.com/LabManager/SOAP/LabManagerinternal.asmx?WSDL")
@@ -7,7 +14,7 @@ client = Client("https://chnservices-lm.dctmlabs.com/LabManager/SOAP/LabManageri
 user = client.factory.create("AuthenticationHeader")
 
 user['username'] = 'shaom2'
-user['password'] = ')Slamdunk1986'
+user['password'] = '!Slamdunk1986'
 user['organizationname'] = 'PF-QA-DFS'
 user['workspacename'] = 'Main'
 
@@ -38,7 +45,7 @@ git_lab_ci_ruunner = 22005
 import suds
 #
 try:
-    print client.service.GetConfigurationByName("pagrant1")
+    print client.service.GetConfigurationByName("Tangram")
     # result = client.service.GetNetworkInfo(22395)
     # print (result.NetInfo)[0].ipAddress
 except suds.WebFault,e:

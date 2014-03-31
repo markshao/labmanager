@@ -21,12 +21,11 @@ Contains classes for basic HTTP transport implementations.
 import urllib2 as u2
 import base64
 import socket
-from cookielib import CookieJar
-from logging import getLogger
-
 from suds.transport import *
 from suds.properties import Unskin
-
+from urlparse import urlparse
+from cookielib import CookieJar
+from logging import getLogger
 
 log = getLogger(__name__)
 
@@ -36,7 +35,7 @@ class HttpTransport(Transport):
     HTTP transport using urllib2.  Provided basic http transport
     that provides for cookies, proxies but no authentication.
     """
-
+    
     def __init__(self, **kwargs):
         """
         @param kwargs: Keyword arguments.
@@ -53,7 +52,7 @@ class HttpTransport(Transport):
         self.cookiejar = CookieJar()
         self.proxy = {}
         self.urlopener = None
-
+        
     def open(self, request):
         try:
             url = request.url
@@ -80,7 +79,7 @@ class HttpTransport(Transport):
             result = Reply(200, fp.headers.dict, fp.read())
             log.debug('received:\n%s', result)
         except u2.HTTPError, e:
-            if e.code in (202, 204):
+            if e.code in (202,204):
                 result = None
             else:
                 raise TransportError(e.msg, e.code, e.fp)
@@ -93,7 +92,7 @@ class HttpTransport(Transport):
         @rtype: u2request: urllib2.Requet.
         """
         self.cookiejar.add_cookie_header(u2request)
-
+        
     def getcookies(self, fp, u2request):
         """
         Add cookies in the request to the cookiejar.
@@ -101,7 +100,7 @@ class HttpTransport(Transport):
         @rtype: u2request: urllib2.Requet.
         """
         self.cookiejar.extract_cookies(fp, u2request)
-
+        
     def u2open(self, u2request):
         """
         Open a connection.
@@ -117,7 +116,7 @@ class HttpTransport(Transport):
             return url.open(u2request)
         else:
             return url.open(u2request, timeout=tm)
-
+            
     def u2opener(self):
         """
         Create a urllib opener.
@@ -128,7 +127,7 @@ class HttpTransport(Transport):
             return u2.build_opener(*self.u2handlers())
         else:
             return self.urlopener
-
+        
     def u2handlers(self):
         """
         Get a collection of urllib handlers.
@@ -138,7 +137,7 @@ class HttpTransport(Transport):
         handlers = []
         handlers.append(u2.ProxyHandler(self.proxy))
         return handlers
-
+            
     def u2ver(self):
         """
         Get the major/minor version of the urllib2 lib.
@@ -152,7 +151,7 @@ class HttpTransport(Transport):
         except Exception, e:
             log.exception(e)
             return 0
-
+        
     def __deepcopy__(self, memo={}):
         clone = self.__class__()
         p = Unskin(self.options)
@@ -168,21 +167,21 @@ class HttpAuthenticated(HttpTransport):
     appends the I{Authorization} http header with base64 encoded
     credentials on every http request.
     """
-
+    
     def open(self, request):
         self.addcredentials(request)
         return HttpTransport.open(self, request)
-
+    
     def send(self, request):
         self.addcredentials(request)
         return HttpTransport.send(self, request)
-
+    
     def addcredentials(self, request):
         credentials = self.credentials()
         if not (None in credentials):
             encoded = base64.encodestring(':'.join(credentials))
             basic = 'Basic %s' % encoded[:-1]
             request.headers['Authorization'] = basic
-
+                 
     def credentials(self):
         return (self.options.username, self.options.password)

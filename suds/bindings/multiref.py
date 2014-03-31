@@ -19,12 +19,12 @@ Provides classes for handling soap multirefs.
 """
 
 from logging import getLogger
+from suds import *
 from suds.sax.element import Element
 
 log = getLogger(__name__)
 
 soapenc = (None, 'http://schemas.xmlsoap.org/soap/encoding/')
-
 
 class MultiRef:
     """
@@ -34,11 +34,11 @@ class MultiRef:
     @ivar catalog: A dictionary of multiref nodes by id.
     @type catalog: dict 
     """
-
+    
     def __init__(self):
         self.nodes = []
         self.catalog = {}
-
+    
     def process(self, body):
         """
         Process the specified soap envelope body and replace I{multiref} node
@@ -54,7 +54,7 @@ class MultiRef:
         self.update(body)
         body.children = self.nodes
         return body
-
+    
     def update(self, node):
         """
         Update the specified I{node} by replacing the I{multiref} references with
@@ -68,7 +68,7 @@ class MultiRef:
         for c in node.children:
             self.update(c)
         return node
-
+            
     def replace_references(self, node):
         """
         Replacing the I{multiref} references with the contents of the 
@@ -91,7 +91,7 @@ class MultiRef:
             if a.name != 'id':
                 node.append(a)
         node.remove(href)
-
+            
     def build_catalog(self, body):
         """
         Create the I{catalog} of multiref nodes by id and the list of

@@ -48,7 +48,7 @@ class DepList:
         self.stack = []
         self.pushed = set()
         self.sorted = None
-
+        
     def add(self, *items):
         """
         Add items to be sorted.
@@ -62,7 +62,7 @@ class DepList:
             key = item[0]
             self.index[key] = item
         return self
-
+        
     def sort(self):
         """
         Sort the list based on dependancies.
@@ -73,7 +73,7 @@ class DepList:
         self.pushed = set()
         for item in self.unsorted:
             popped = []
-            self.push(item)
+            self.push(item)            
             while len(self.stack):
                 try:
                     top = self.top()
@@ -90,7 +90,7 @@ class DepList:
                 self.sorted.append(p)
         self.unsorted = self.sorted
         return self.sorted
-
+    
     def top(self):
         """
         Get the item at the top of the stack.
@@ -98,7 +98,7 @@ class DepList:
         @rtype: (item, iter)
         """
         return self.stack[-1]
-
+    
     def push(self, item):
         """
         Push and item onto the sorting stack.
@@ -112,7 +112,7 @@ class DepList:
         frame = (item, iter(item[1]))
         self.stack.append(frame)
         self.pushed.add(item)
-
+    
     def pop(self):
         """
         Pop the top item off the stack and append
@@ -130,10 +130,10 @@ class DepList:
 if __name__ == '__main__':
     a = ('a', ('x',))
     b = ('b', ('a',))
-    c = ('c', ('a', 'b'))
+    c = ('c', ('a','b'))
     d = ('d', ('c',))
-    e = ('e', ('d', 'a'))
-    f = ('f', ('e', 'c', 'd', 'a'))
+    e = ('e', ('d','a'))
+    f = ('f', ('e','c','d','a'))
     x = ('x', ())
     L = DepList()
     L.add(c, e, d, b, f, a, x)

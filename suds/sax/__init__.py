@@ -48,11 +48,11 @@ def splitPrefix(name):
     """
     if isinstance(name, basestring) \
         and ':' in name:
-        return tuple(name.split(':', 1))
+            return tuple(name.split(':', 1))
     else:
         return (None, name)
 
-
+   
 class Namespace:
     """
     The namespace class represents XML namespaces.
@@ -63,15 +63,15 @@ class Namespace:
     xsdns = ('xs', 'http://www.w3.org/2001/XMLSchema')
     xsins = ('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
     all = (xsdns, xsins)
-
+    
     @classmethod
     def create(cls, p=None, u=None):
         return (p, u)
-
+    
     @classmethod
     def none(cls, ns):
         return ( ns == cls.default )
-
+    
     @classmethod
     def xsd(cls, ns):
         try:
@@ -79,7 +79,7 @@ class Namespace:
         except:
             pass
         return False
-
+    
     @classmethod
     def xsi(cls, ns):
         try:
@@ -87,7 +87,7 @@ class Namespace:
         except:
             pass
         return False
-
+    
     @classmethod
     def xs(cls, ns):
         return ( cls.xsd(ns) or cls.xsi(ns) )
@@ -99,7 +99,7 @@ class Namespace:
         except:
             pass
         return False
-
+    
     @classmethod
     def isns(cls, ns):
         try:

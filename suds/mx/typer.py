@@ -19,6 +19,7 @@ Provides sx typing classes.
 """
 
 from logging import getLogger
+from suds import *
 from suds.mx import *
 from suds.sax import Namespace as NS
 from suds.sax.text import Text
@@ -34,15 +35,15 @@ class Typer:
     """
 
     types = {
-        int: ('int', NS.xsdns),
-        long: ('long', NS.xsdns),
-        float: ('float', NS.xsdns),
-        str: ('string', NS.xsdns),
-        unicode: ('string', NS.xsdns),
-        Text: ('string', NS.xsdns),
-        bool: ('boolean', NS.xsdns),
-    }
-
+        int : ('int', NS.xsdns),
+        long : ('long', NS.xsdns),
+        float : ('float', NS.xsdns),
+        str : ('string', NS.xsdns),
+        unicode : ('string', NS.xsdns),
+        Text : ('string', NS.xsdns),
+        bool : ('boolean', NS.xsdns),
+     }
+                
     @classmethod
     def auto(cls, node, value=None):
         """
@@ -91,9 +92,9 @@ class Typer:
             ns = cls.genprefix(node, ns)
             qname = ':'.join((ns[0], tval))
             node.set(xta, qname)
-            node.addPrefix(ns[0], ns[1])
+            node.addPrefix(ns[0], ns[1]) 
         return node
-
+    
     @classmethod
     def genprefix(cls, node, ns):
         """
@@ -110,7 +111,7 @@ class Typer:
             if u is None or u == ns[1]:
                 return (p, ns[1])
         raise Exception('auto prefix, exhausted')
-
+    
     @classmethod
     def known(cls, object):
         try:

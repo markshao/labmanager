@@ -22,6 +22,7 @@ unmarshalling (XML).
 from suds.sudsobject import Object
 
 
+
 class Content(Object):
     """
     @ivar node: The content source node.
@@ -31,7 +32,7 @@ class Content(Object):
     @ivar text: The (optional) content (xml) text.
     @type text: basestring
     """
-
+    
     extensions = []
 
     def __init__(self, node, **kwargs):
@@ -39,7 +40,7 @@ class Content(Object):
         self.node = node
         self.data = None
         self.text = None
-        for k, v in kwargs.items():
+        for k,v in kwargs.items():
             setattr(self, k, v)
 
     def __getattr__(self, name):

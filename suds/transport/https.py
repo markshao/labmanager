@@ -19,10 +19,9 @@ Contains classes for basic HTTP (authenticated) transport implementations.
 """
 
 import urllib2 as u2
-from logging import getLogger
-
+from suds.transport import *
 from suds.transport.http import HttpTransport
-
+from logging import getLogger
 
 log = getLogger(__name__)
 
@@ -35,7 +34,7 @@ class HttpAuthenticated(HttpTransport):
     @ivar pm: The password manager.
     @ivar handler: The authentication handler.
     """
-
+    
     def __init__(self, **kwargs):
         """
         @param kwargs: Keyword arguments.
@@ -55,31 +54,31 @@ class HttpAuthenticated(HttpTransport):
         """
         HttpTransport.__init__(self, **kwargs)
         self.pm = u2.HTTPPasswordMgrWithDefaultRealm()
-
+        
     def open(self, request):
         self.addcredentials(request)
-        return HttpTransport.open(self, request)
-
+        return  HttpTransport.open(self, request)
+    
     def send(self, request):
         self.addcredentials(request)
-        return HttpTransport.send(self, request)
-
+        return  HttpTransport.send(self, request)
+    
     def addcredentials(self, request):
         credentials = self.credentials()
         if not (None in credentials):
             u = credentials[0]
             p = credentials[1]
             self.pm.add_password(None, request.url, u, p)
-
+    
     def credentials(self):
         return (self.options.username, self.options.password)
-
+    
     def u2handlers(self):
-        handlers = HttpTransport.u2handlers(self)
-        handlers.append(u2.HTTPBasicAuthHandler(self.pm))
-        return handlers
-
-
+            handlers = HttpTransport.u2handlers(self)
+            handlers.append(u2.HTTPBasicAuthHandler(self.pm))
+            return handlers
+    
+    
 class WindowsHttpAuthenticated(HttpAuthenticated):
     """
     Provides Windows (NTLM) http authentication.
@@ -87,7 +86,7 @@ class WindowsHttpAuthenticated(HttpAuthenticated):
     @ivar handler: The authentication handler.
     @author: Christopher Bess
     """
-
+        
     def u2handlers(self):
         # try to import ntlm support  
         try:

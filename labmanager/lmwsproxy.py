@@ -8,8 +8,14 @@ WORKSPACE = 'workspacename'
 
 AUTHENTICATION_HEADER = 'AuthenticationHeader'
 
-from ..suds.client import Client
-from ..suds import WebFault
+import sys, os
+
+# some hack
+sys_path = os.path.abspath(os.path.relpath(os.path.pardir, os.path.dirname(__file__)))
+sys.path.insert(0, sys_path)
+
+from suds.client import Client
+from suds import WebFault
 
 
 TIMEOUT = 60 * 60 * 5

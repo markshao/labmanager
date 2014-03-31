@@ -27,14 +27,14 @@ log = getLogger(__name__)
 
 class Builder:
     """ Builder used to construct an object for types defined in the schema """
-
+    
     def __init__(self, resolver):
         """
         @param resolver: A schema object name resolver.
         @type resolver: L{resolver.Resolver}
         """
         self.resolver = resolver
-
+        
     def build(self, name):
         """ build a an object for the specified typename as defined in the schema """
         if isinstance(name, basestring):
@@ -59,7 +59,7 @@ class Builder:
                 continue
             self.process(data, child, history[:])
         return data
-
+            
     def process(self, data, type, history):
         """ process the specified type then process its children """
         if type in history:
@@ -98,7 +98,7 @@ class Builder:
             name = '_%s' % attr.name
             value = attr.get_default()
             setattr(data, name, value)
-
+                
     def skip_child(self, child, ancestry):
         """ get whether or not to skip the specified child """
         if child.any(): return True
@@ -106,7 +106,7 @@ class Builder:
             if x.choice():
                 return True
         return False
-
+    
     def ordering(self, type):
         """ get the ordering """
         result = []

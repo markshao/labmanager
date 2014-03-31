@@ -18,6 +18,8 @@
 Provides filtered attribute list classes.
 """
 
+from suds import *
+from suds.umx import *
 from suds.sax import Namespace
 
 
@@ -29,14 +31,13 @@ class AttrList:
     @ivar raw: The I{raw} attribute list.
     @type raw: list
     """
-
     def __init__(self, attributes):
         """
         @param attributes: A list of attributes
         @type attributes: list
         """
         self.raw = attributes
-
+        
     def real(self):
         """
         Get list of I{real} attributes which exclude xs and xml attributes.
@@ -46,7 +47,7 @@ class AttrList:
         for a in self.raw:
             if self.skip(a): continue
             yield a
-
+            
     def rlen(self):
         """
         Get the number of I{real} attributes which exclude xs and xml attributes.
@@ -57,7 +58,7 @@ class AttrList:
         for a in self.real():
             n += 1
         return n
-
+            
     def lang(self):
         """
         Get list of I{filtered} attributes which exclude xs.

@@ -19,6 +19,7 @@ Provides base classes for XML->object I{unmarshalling}.
 """
 
 from logging import getLogger
+from suds import *
 from suds.umx import *
 from suds.umx.attrlist import AttrList
 from suds.sax.text import Text
@@ -27,15 +28,14 @@ from suds.sudsobject import Factory, merge
 
 log = getLogger(__name__)
 
-reserved = {'class': 'cls', 'def': 'dfn', }
-
+reserved = { 'class':'cls', 'def':'dfn', }
 
 class Core:
     """
     The abstract XML I{node} unmarshaller.  This class provides the
     I{core} unmarshalling functionality.
     """
-
+        
     def process(self, content):
         """
         Process an object graph representation of the xml I{node}.
@@ -46,7 +46,7 @@ class Core:
         """
         self.reset()
         return self.append(content)
-
+    
     def append(self, content):
         """
         Process the specified node and convert the XML document into
@@ -64,7 +64,7 @@ class Core:
         self.append_text(content)
         self.end(content)
         return self.postprocess(content)
-
+            
     def postprocess(self, content):
         """
         Perform final processing of the resulting data structure as follows:
@@ -83,10 +83,10 @@ class Core:
             return node
         attributes = AttrList(node.attributes)
         if attributes.rlen() and \
-                not len(node.children) and \
-                node.hasText():
-            p = Factory.property(node.name, node.getText())
-            return merge(content.data, p)
+            not len(node.children) and \
+            node.hasText():
+                p = Factory.property(node.name, node.getText())
+                return merge(content.data, p)
         if len(content.data):
             return content.data
         lang = attributes.lang()
@@ -101,7 +101,7 @@ class Core:
             return Text(content.text, lang=lang)
         else:
             return content.text
-
+    
     def append_attributes(self, content):
         """
         Append attribute nodes into L{Content.data}.
@@ -114,7 +114,7 @@ class Core:
             name = attr.name
             value = attr.value
             self.append_attribute(name, value, content)
-
+            
     def append_attribute(self, name, value, content):
         """
         Append an attribute name/value into L{Content.data}.
@@ -128,7 +128,7 @@ class Core:
         key = name
         key = '_%s' % reserved.get(key, key)
         setattr(content.data, key, value)
-
+            
     def append_children(self, content):
         """
         Append child nodes into L{Content.data}
@@ -150,10 +150,10 @@ class Core:
                 if cval is None:
                     setattr(content.data, key, [])
                 else:
-                    setattr(content.data, key, [cval, ])
+                    setattr(content.data, key, [cval,])
             else:
                 setattr(content.data, key, cval)
-
+    
     def append_text(self, content):
         """
         Append text nodes into L{Content.data}
@@ -162,7 +162,7 @@ class Core:
         """
         if content.node.hasText():
             content.text = content.node.getText()
-
+        
     def reset(self):
         pass
 
@@ -176,7 +176,7 @@ class Core:
         @rtype: L{Object}
         """
         content.data = Factory.object(content.node.name)
-
+    
     def end(self, content):
         """
         Processing on I{node} has ended.
@@ -184,7 +184,7 @@ class Core:
         @type content: L{Content}
         """
         pass
-
+    
     def bounded(self, content):
         """
         Get whether the content is bounded (not a list).
@@ -194,7 +194,7 @@ class Core:
         @rtype: boolean
         '"""
         return ( not self.unbounded(content) )
-
+    
     def unbounded(self, content):
         """
         Get whether the object is unbounded (a list).
@@ -204,7 +204,7 @@ class Core:
         @rtype: boolean
         '"""
         return False
-
+    
     def nillable(self, content):
         """
         Get whether the object is nillable.

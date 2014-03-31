@@ -25,7 +25,6 @@ from suds.sax import Namespace
 
 log = getLogger(__name__)
 
-
 class ServiceDefinition:
     """
     A service definition provides an object used to generate a textual description
@@ -41,7 +40,7 @@ class ServiceDefinition:
     @ivar types: A list of type definitions
     @type types: [I{Type},..] 
     """
-
+    
     def __init__(self, wsdl, service):
         """
         @param wsdl: A wsdl object
@@ -60,7 +59,7 @@ class ServiceDefinition:
         self.publictypes()
         self.getprefixes()
         self.pushprefixes()
-
+    
     def pushprefixes(self):
         """
         Add our prefixes to the wsdl so that when users invoke methods
@@ -88,7 +87,7 @@ class ServiceDefinition:
                 metrics.log.debug("method '%s' created: %s", m.name, timer)
             p[1].sort()
         timer.stop()
-
+            
     def findport(self, port):
         """
         Find and return a port tuple for the specified port.
@@ -103,14 +102,14 @@ class ServiceDefinition:
         p = (port, [])
         self.ports.append(p)
         return p
-
+            
     def getprefixes(self):
         """
         Add prefixes foreach namespace referenced by parameter types.
         """
         namespaces = []
         for l in (self.params, self.types):
-            for t, r in l:
+            for t,r in l:
                 ns = r.namespace()
                 if ns[1] is None: continue
                 if ns[1] in namespaces: continue
@@ -128,7 +127,7 @@ class ServiceDefinition:
             p = self.nextprefix()
             ns = (p, u)
             self.prefixes.append(ns)
-
+            
     def paramtypes(self):
         """ get all parameter types """
         for m in [p[1] for p in self.ports]:
@@ -137,7 +136,7 @@ class ServiceDefinition:
                     if pd[1] in self.params: continue
                     item = (pd[1], pd[1].resolve())
                     self.params.append(item)
-
+                    
     def publictypes(self):
         """ get all public types """
         for t in self.wsdl.schema.types.values():
@@ -145,9 +144,9 @@ class ServiceDefinition:
             if t in self.types: continue
             item = (t, t)
             self.types.append(item)
-        tc = lambda x, y: cmp(x[0].name, y[0].name)
+        tc = lambda x,y: cmp(x[0].name, y[0].name)
         self.types.sort(cmp=tc)
-
+        
     def nextprefix(self):
         """
         Get the next available prefix.  This means a prefix starting with 'ns' with
@@ -156,12 +155,12 @@ class ServiceDefinition:
         """
         used = [ns[0] for ns in self.prefixes]
         used += [ns[0] for ns in self.wsdl.root.nsprefixes.items()]
-        for n in range(0, 1024):
-            p = 'ns%d' % n
+        for n in range(0,1024):
+            p = 'ns%d'%n
             if p not in used:
                 return p
         raise Exception('prefixes exhausted')
-
+    
     def getprefix(self, u):
         """
         Get the prefix for the specified namespace (uri)
@@ -174,8 +173,8 @@ class ServiceDefinition:
             if u == ns[1]: return ns[0]
         for ns in self.prefixes:
             if u == ns[1]: return ns[0]
-        raise Exception('ns (%s) not mapped' % u)
-
+        raise Exception('ns (%s) not mapped'  % u)
+    
     def xlate(self, type):
         """
         Get a (namespace) translated I{qualified} name for specified type.
@@ -193,7 +192,7 @@ class ServiceDefinition:
             return name
         prefix = self.getprefix(ns[1])
         return ':'.join((prefix, name))
-
+        
     def description(self):
         """
         Get a textual description of the service for which this object represents.
@@ -201,7 +200,7 @@ class ServiceDefinition:
         @rtype: str
         """
         s = []
-        indent = (lambda n: '\n%*s' % (n * 3, ' '))
+        indent = (lambda n :  '\n%*s'%(n*3,' '))
         s.append('Service ( %s ) tns="%s"' % (self.service.name, self.wsdl.tns[1]))
         s.append(indent(1))
         s.append('Prefixes (%d)' % len(self.prefixes))
@@ -237,10 +236,10 @@ class ServiceDefinition:
                 s.append(self.xlate(t[0]))
         s.append('\n\n')
         return ''.join(s)
-
+    
     def __str__(self):
         return unicode(self).encode('utf-8')
-
+        
     def __unicode__(self):
         try:
             return self.description()

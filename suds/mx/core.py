@@ -19,6 +19,8 @@ Provides I{marshaller} core classes.
 """
 
 from logging import getLogger
+from suds import *
+from suds.mx import *
 from suds.mx.appender import ContentAppender
 from suds.sax.element import Element
 from suds.sax.document import Document
@@ -59,7 +61,7 @@ class Core:
         else:
             self.append(document, content)
         return document.root()
-
+    
     def append(self, parent, content):
         """
         Append the specified L{content} to the I{parent}.
@@ -88,7 +90,7 @@ class Core:
         @rtype: L{Element}
         """
         return Element(content.tag)
-
+    
     def start(self, content):
         """
         Appending this content has started.
@@ -98,7 +100,7 @@ class Core:
         @rtype: boolean
         """
         return True
-
+    
     def suspend(self, content):
         """
         Appending this content has suspended.
@@ -106,7 +108,7 @@ class Core:
         @type content: L{Content}
         """
         pass
-
+    
     def resume(self, content):
         """
         Appending this content has resumed.
@@ -124,7 +126,7 @@ class Core:
         @type content: L{Content}
         """
         pass
-
+    
     def setnil(self, node, content):
         """
         Set the value of the I{node} to nill.
@@ -145,7 +147,7 @@ class Core:
         @return: The default.
         """
         pass
-
+    
     def optional(self, content):
         """
         Get whether the specified content is optional.

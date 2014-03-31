@@ -18,9 +18,11 @@
 Contains classes for transport options.
 """
 
+
+from suds.transport import *
 from suds.properties import *
 
-
+   
 class Options(Skin):
     """
     Options:
@@ -42,13 +44,12 @@ class Options(Skin):
         - B{password} - The password used for http authentication.
                 - type: I{str}
                 - default: None
-    """
-
+    """    
     def __init__(self, **kwargs):
         domain = __name__
         definitions = [
             Definition('proxy', dict, {}),
-            Definition('timeout', (int, float), 90),
+            Definition('timeout', (int,float), 90),
             Definition('headers', dict, {}),
             Definition('username', basestring, None),
             Definition('password', basestring, None),

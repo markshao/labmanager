@@ -40,7 +40,7 @@ class Encoded(Literal):
     A SOAP section (5) encoding marshaller.
     This marshaller supports rpc/encoded soap styles.
     """
-
+    
     def start(self, content):
         #
         # For soap encoded arrays, the 'aty' (array type) information
@@ -49,7 +49,7 @@ class Encoded(Literal):
         # containing values that are 'typed' suds objects. 
         #
         start = Literal.start(self, content)
-        if start and isinstance(content.value, (list, tuple)):
+        if start and isinstance(content.value, (list,tuple)):
             resolved = content.type.resolve()
             for c in resolved:
                 if hasattr(c[0], 'aty'):
@@ -57,7 +57,7 @@ class Encoded(Literal):
                     self.cast(content)
                     break
         return start
-
+    
     def end(self, parent, content):
         #
         # For soap encoded arrays, the soapenc:arrayType attribute is
@@ -75,9 +75,9 @@ class Encoded(Literal):
         child.addPrefix(ns0[0], ns0[1])
         child.addPrefix(ns1[0], ns1[1])
         name = '%s:arrayType' % ns1[0]
-        value = '%s:%s[%d]' % (ns0[0], aty[0], len(array))
+        value = '%s:%s[%d]' % (ns0[0], aty[0], len(array)) 
         child.set(name, value)
-
+        
     def encode(self, node, content):
         if content.type.any():
             Typer.auto(node, content.value)
@@ -90,7 +90,7 @@ class Encoded(Literal):
         if self.xstq:
             ns = content.real.namespace()
         Typer.manual(node, name, ns)
-
+        
     def cast(self, content):
         """
         Cast the I{untyped} list items found in content I{value}.
@@ -117,13 +117,13 @@ class Encoded(Literal):
             if isinstance(x, Object):
                 md = x.__metadata__
                 md.sxtype = ref
-                array.item.append(x)
+                array.item.append(x) 
                 continue
             if isinstance(x, dict):
                 x = Factory.object(ref.name, x)
                 md = x.__metadata__
                 md.sxtype = ref
-                array.item.append(x)
+                array.item.append(x) 
                 continue
             x = Factory.property(ref.name, x)
             md = x.__metadata__

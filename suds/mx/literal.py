@@ -41,6 +41,7 @@ Content.extensions.append('real')
 Content.extensions.append('ancestry')
 
 
+
 class Typed(Core):
     """
     A I{typed} marshaller.
@@ -64,10 +65,10 @@ class Typed(Core):
         self.schema = schema
         self.xstq = xstq
         self.resolver = GraphResolver(self.schema)
-
+    
     def reset(self):
         self.resolver.reset()
-
+            
     def start(self, content):
         #
         # Start marshalling the 'content' by ensuring that both the
@@ -80,7 +81,7 @@ class Typed(Core):
         if content.type is None:
             name = content.tag
             if name.startswith('_'):
-                name = '@' + name[1:]
+                name = '@'+name[1:]
             content.type = self.resolver.find(name, content.value)
             if content.type is None:
                 raise TypeNotFound(content.tag)
@@ -104,7 +105,7 @@ class Typed(Core):
             return False
         else:
             return True
-
+        
     def suspend(self, content):
         #
         # Suspend to process a list content.  Primarily, this
@@ -112,7 +113,7 @@ class Typed(Core):
         # stack so the list items can be marshalled.
         #
         self.resolver.pop()
-
+    
     def resume(self, content):
         #
         # Resume processing a list content.  To do this, we
@@ -120,7 +121,7 @@ class Typed(Core):
         # back onto the resolver stack.
         #
         self.resolver.push(Frame(content.type))
-
+        
     def end(self, parent, content):
         #
         # End processing the content.  Make sure the content
@@ -135,7 +136,7 @@ class Typed(Core):
             raise Exception, \
                 'content (end) mismatch: top=(%s) cont=(%s)' % \
                 (current, content)
-
+    
     def node(self, content):
         #
         # Create an XML node and namespace qualify as defined
@@ -150,7 +151,7 @@ class Typed(Core):
         self.encode(node, content)
         log.debug('created - node:\n%s', node)
         return node
-
+    
     def setnil(self, node, content):
         #
         # Set the 'node' nil only if the XSD type
@@ -158,7 +159,7 @@ class Typed(Core):
         #
         if content.type.nillable:
             node.setnil()
-
+            
     def setdefault(self, node, content):
         #
         # Set the node to the default value specified
@@ -170,7 +171,7 @@ class Typed(Core):
         else:
             node.setText(default)
         return default
-
+    
     def optional(self, content):
         if content.type.optional():
             return True
@@ -178,7 +179,7 @@ class Typed(Core):
             if a.optional():
                 return True
         return False
-
+    
     def encode(self, node, content):
         # Add (soap) encoding information only if the resolved
         # type is derived by extension.  Further, the xsi:type values
@@ -195,7 +196,7 @@ class Typed(Core):
         if self.xstq:
             ns = content.real.namespace('ns1')
         Typer.manual(node, name, ns)
-
+    
     def skip(self, content):
         """
         Get whether to skip this I{content}.
@@ -210,10 +211,10 @@ class Typed(Core):
             v = content.value
             if v is None:
                 return True
-            if isinstance(v, (list, tuple)) and len(v) == 0:
+            if isinstance(v, (list,tuple)) and len(v) == 0:
                 return True
         return False
-
+    
     def optional(self, content):
         if content.type.optional():
             return True
@@ -221,7 +222,7 @@ class Typed(Core):
             if a.optional():
                 return True
         return False
-
+    
     def translate(self, content):
         """
         Translate using the XSD type information.
@@ -245,7 +246,7 @@ class Typed(Core):
         v = content.real.translate(v, False)
         content.value = v
         return self
-
+        
     def sort(self, content):
         """
         Sort suds object attributes based on ordering defined

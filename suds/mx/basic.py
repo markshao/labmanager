@@ -19,6 +19,7 @@ Provides basic I{marshaller} classes.
 """
 
 from logging import getLogger
+from suds import *
 from suds.mx import *
 from suds.mx.core import Core
 
@@ -29,7 +30,7 @@ class Basic(Core):
     """
     A I{basic} (untyped) marshaller.
     """
-
+    
     def process(self, value, tag=None):
         """
         Process (marshal) the tag with the specified value using the
